@@ -1,4 +1,4 @@
-type Alignment = "left"|"right"
+export type Alignment = "left"|"right"
 
 export interface TableDefinition {
 	names?: string[]
@@ -21,7 +21,7 @@ export interface TableMethodGeneratorOptions {
 
 function get_total_width(definition: TableDefinition): number {
 	let names = definition.names || []
-	if (names.length == 0) { return 0; }
+	if (names.length === 0) { return 0; }
 
 	let total_width = 0
 	let widths = definition.widths || []
@@ -38,7 +38,7 @@ function get_total_width(definition: TableDefinition): number {
 export function generate(options: TableMethodGeneratorOptions): string {
 	const section_names = options.definition.names || []
 	const method_name = options.method_name || "PrintTable"
-	if (section_names.length == 0) {
+	if (section_names.length === 0) {
 		return `static void ${method_name}()\n{\n}`;
 	}
 
@@ -60,7 +60,7 @@ export function generate(options: TableMethodGeneratorOptions): string {
 		const section = section_names[i]
 		const width = section_widths[i] || section.length
 		const alighment = section_alignments[i] || "right"
-		if (alighment == "left") {
+		if (alighment === "left") {
 			row_components.push(`{${i},-${width}}`)
 		} else {
 			row_components.push(`{${i},${width}}`)
@@ -107,7 +107,7 @@ export function generate(options: TableMethodGeneratorOptions): string {
 
 function render_table_row(definition: TableDefinition, entry: string[]): string {
 	let names = definition.names || []
-	if (names.length == 0) { return ""; }
+	if (names.length === 0) { return ""; }
 
 	const columns: string[] = []
 	const alighments = definition.alignments || []
@@ -118,7 +118,7 @@ function render_table_row(definition: TableDefinition, entry: string[]): string 
 		const width = widths[i] || names[i].length
 
 		const filler = " ".repeat(Math.max(width - value.length, 0));
-		if (alighment == "left") {
+		if (alighment === "left") {
 			columns.push(value + filler);
 		} else {
 			columns.push(filler + value);

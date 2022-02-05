@@ -1,41 +1,34 @@
+import { useState } from 'react';
 import './App.css';
+import TableDefinitionForm from './TableDefinitionForm';
 import TableMethodCodeBlock from './TableMethodCodeBlock';
 import { TableDefinition } from './TableMethodGenerator';
-import TableRenderer from './TableRenderer';
 
 function App() {
-	let definition: TableDefinition = {
+	let [definition, setDefinition] = useState<TableDefinition>({
 		names: ["Miestas", "Atsakingas", "Vardas", "Adresas", "Metai"],
 		fields: ["City", "Manager", "Name", "Address", "Year"],
 		widths: [10, 20, 18, 15, 5],
 		alignments: ["left", "left", "left", "left", "right"]
-	}
+	})
 
-	let data = {
-		method_name: "PrintLocations",
-		empty_message: "Nėra",
-
-		container_type: "LocationsContainer",
-		entry_name: "l",
-		entry_type: "Location",
-
+	let [data, setData] = useState({
 		definition
-	};
+	});
 
-	let test_entries = [
-		["Alytus", "AlytausMuziejusA", "Jonas Jonaitis", "GatveA", "1999"],
-		["Alytus", "AlytausMuziejusB", "Ona Onaite", "GatveB", "2018"],
-		["Kaunas", "KaunasMuziejusC", "Jonas Jonaitis", "GatveC", "2004"],
-		["Klaipėda", "KlaipėdaMuziejusD", "Ona Onaite", "GatveD", "1988"],
-	];
+	const onChange = (e: TableDefinition) => {
+		definition = e
+		data.definition = e
+		setDefinition(e)
+		setData({...data})
+	}
 
   return (
     <div className="App">
 			<main>
+				<TableDefinitionForm value={definition} onChange={onChange} />
 				<hr />
 				{TableMethodCodeBlock(data)}
-				<hr />
-				<TableRenderer definition={definition} entries={test_entries} />
 			</main>
     </div>
   );
