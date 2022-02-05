@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.51eb8ebc.css",
-    "main.js": "/static/js/main.77c85f9d.js",
-    "static/js/787.7d8fd132.chunk.js": "/static/js/787.7d8fd132.chunk.js",
-    "index.html": "/index.html",
-    "main.51eb8ebc.css.map": "/static/css/main.51eb8ebc.css.map",
-    "main.77c85f9d.js.map": "/static/js/main.77c85f9d.js.map",
-    "787.7d8fd132.chunk.js.map": "/static/js/787.7d8fd132.chunk.js.map"
+    "main.css": "/table-method-generator/static/css/main.51eb8ebc.css",
+    "main.js": "/table-method-generator/static/js/main.a9a7e6c5.js",
+    "static/js/787.7d8fd132.chunk.js": "/table-method-generator/static/js/787.7d8fd132.chunk.js",
+    "index.html": "/table-method-generator/index.html",
+    "main.51eb8ebc.css.map": "/table-method-generator/static/css/main.51eb8ebc.css.map",
+    "main.a9a7e6c5.js.map": "/table-method-generator/static/js/main.a9a7e6c5.js.map",
+    "787.7d8fd132.chunk.js.map": "/table-method-generator/static/js/787.7d8fd132.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.51eb8ebc.css",
-    "static/js/main.77c85f9d.js"
+    "static/js/main.a9a7e6c5.js"
   ]
 }
