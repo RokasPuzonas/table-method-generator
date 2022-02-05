@@ -10,7 +10,8 @@
 }
 
 .App {
-  background-color: #282c34;
+  background-color: #1E1E1E;
+	color: #CAD6DC;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
