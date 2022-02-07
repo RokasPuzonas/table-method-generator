@@ -1,14 +1,14 @@
-import { render_table, TableDefinition } from "./TableMethodGenerator"
+import { render_table, TableColumns } from "./TableMethodGenerator"
 
 export interface TableRendererProps {
-	definition: TableDefinition,
+	columns: TableColumns,
 	entries: string[][]
 }
 
 function TableRenderer(props: TableRendererProps) {
 	return (
 		<pre>
-			{render_table(props.definition, props.entries)}
+			{render_table(props.columns, props.entries)}
 		</pre>
 	)
 }

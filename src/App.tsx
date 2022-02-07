@@ -5,30 +5,52 @@ import TableMethodCodeBlock from './TableMethodCodeBlock';
 import { TableDefinition } from './TableMethodGenerator';
 
 function App() {
-	let [definition, setDefinition] = useState<TableDefinition>({
-		names: ["Miestas", "Atsakingas", "Vardas", "Adresas", "Metai"],
-		fields: ["City", "Manager", "Name", "Address", "Year"],
-		widths: [10, 20, 18, 15, 5],
-		alignments: ["left", "left", "left", "left", "right"]
-	})
+	let [columns, setColumns] = useState<TableColumns>([
+		{
+			name: "Miestas",
+			field: "City",
+			width: 10,
+			alignment: "left"
+		},
+		{
+			name: "Atsakingas",
+			field: "Manager",
+			width: 20,
+			alignment: "left"
+		},
+		{
+			name: "Vardas",
+			field: "Name",
+			width: 18,
+			alignment: "left"
+		},
+		{
+			name: "Address",
+			field: "Adress",
+			width: 15,
+			alignment: "left"
+		},
+		{
+			name: "Metai",
+			field: "Year",
+			width: 5,
+			alignment: "right"
+		}
+	])
 
-	let [data, setData] = useState({
-		definition
-	});
+	let [generatorOptions, setGeneratorOptions] = useState<TableMethodGeneratorOptions>({});
 
-	const onChange = (e: TableDefinition) => {
-		definition = e
-		data.definition = e
-		setDefinition(e)
-		setData({...data})
+	const onChange = (e: TableColumns) => {
+		columns = e
+		setColumns(e)
 	}
 
   return (
     <div className="App">
 			<main>
-				<TableDefinitionForm value={definition} onChange={onChange} />
+				<TableDefinitionForm value={columns} onChange={onChange} />
 				<hr />
-				{TableMethodCodeBlock(data)}
+				<TableMethodCodeBlock columns={columns} options={generatorOptions}/>
 			</main>
     </div>
   );

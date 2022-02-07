@@ -1,13 +1,13 @@
 import { ChangeEvent, useState } from "react"
-import { Alignment, TableDefinition } from "./TableMethodGenerator"
+import { Alignment, TableColumn, TableColumns } from "./TableMethodGenerator"
 
 
-interface TableDefinitionRowProps {
-	value: Row
-	onChange?: { (e: Row): void }
+interface TableColumnProps {
+	value: TableColumn
+	onChange?: { (e: TableColumn): void }
 }
 
-function TableDefinitionRow(props: TableDefinitionRowProps) {
+function TableDefinitionRow(props: TableColumnProps) {
 	let [, setName] = useState(props.value.name)
 	const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
 		props.value.name = e.target.value
@@ -35,10 +35,10 @@ function TableDefinitionRow(props: TableDefinitionRowProps) {
 		}
 	}
 
-	let [, setAlignment] = useState(props.value.alighment)
+	let [, setAlignment] = useState(props.value.alignment)
 	const onChangeAlignment = (e: ChangeEvent<HTMLSelectElement>) => {
-		props.value.alighment = e.target.value as Alignment
-		setAlignment(props.value.alighment)
+		props.value.alignment = e.target.value as Alignment
+		setAlignment(props.value.alignment)
 		if (props.onChange) {
 			props.onChange(props.value)
 		}
@@ -49,7 +49,7 @@ function TableDefinitionRow(props: TableDefinitionRowProps) {
 			<input type="text" value={props.value.name} onChange={onChangeName} />
 			<input type="text" value={props.value.field} onChange={onChangeField} />
 			<input type="number" value={props.value.width || props.value.name.length} onChange={onChangeWidth}/>
-			<select value={props.value.alighment} onChange={onChangeAlignment}>
+			<select value={props.value.alignment} onChange={onChangeAlignment}>
 				<option value="right">Right</option>
 				<option value="left">Left</option>
 			</select>
@@ -58,73 +58,35 @@ function TableDefinitionRow(props: TableDefinitionRowProps) {
 }
 
 interface TableDefinitionProps {
-	value: TableDefinition
-	onChange?: { (e: TableDefinition): void }
-}
-
-interface Row {
-	name: string
-	width?: number
-	field?: string
-	alighment?: Alignment
-}
-
-function intoRows(definition: TableDefinition): Row[] {
-	const rows: Row[] = []
-	if (definition.names !== undefined) {
-		for (let i = 0; i < definition.names.length; i++) {
-			rows.push({
-				name: definition.names[i],
-				width: (definition.widths || [])[i],
-				field: (definition.fields || [])[i],
-				alighment: (definition.alignments || [])[i],
-			})
-		}
-	}
-	return rows
-}
-
-function fromRows(rows: Row[]): TableDefinition {
-	const definition: TableDefinition = {
-		names: [],
-		widths: [],
-		fields: [],
-		alignments: []
-	}
-	for (const row of rows) {
-		(definition.names as string[]).push(row.name);
-		(definition.widths as (number|undefined)[]).push(row.width);
-		(definition.fields as (string|undefined)[]).push(row.field);
-		(definition.alignments as (Alignment|undefined)[]).push(row.alighment);
-	}
-	return definition
+	value: TableColumns
+	onChange?: { (e: TableColumns): void }
 }
 
 function TableDefinitionForm(props: TableDefinitionProps) {
 	let [currentName, setCurrentName] = useState("")
 
-	let [rows, setRows] = useState<Row[]>(intoRows(props.value))
+	let [columns, setColumns] = useState<TableColumns>(props.value)
 
 	const addRow = () => {
-		rows.push({ name: currentName })
+		columns.push({ name: currentName })
 		setCurrentName("")
 		if (props.onChange !== undefined) {
-			props.onChange(fromRows(rows))
+			props.onChange(columns)
 		}
 	}
 
-	const updateRow = (i: number, row: Row) => {
-		if (row.name === "") {
-			rows.splice(i, 1)
-			rows = [...rows]
-			setRows(rows)
+	const updateRow = (i: number, column: TableColumn) => {
+		if (column.name === "") {
+			columns.splice(i, 1)
+			columns = [...columns]
+			setColumns(columns)
 		} else {
-			rows = [...rows]
-			rows[i] = row
-			setRows(rows)
+			columns = [...columns]
+			columns[i] = column
+			setColumns(columns)
 		}
 		if (props.onChange !== undefined) {
-			props.onChange(fromRows(rows))
+			props.onChange(columns)
 		}
 	}
 
@@ -139,7 +101,7 @@ function TableDefinitionForm(props: TableDefinitionProps) {
 			/>
 			<ol>
 				{
-					rows.map((item, i) =>
+					columns.map((item, i) =>
 						<TableDefinitionRow key={i} value={item} onChange={(e) => updateRow(i, e)}/>
 					)
 				}
