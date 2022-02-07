@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import TableDefinitionForm from './TableDefinitionForm';
 import TableMethodCodeBlock from './TableMethodCodeBlock';
-import { TableDefinition } from './TableMethodGenerator';
+import { TableColumns } from './TableMethodGenerator';
 
 function App() {
 	let [columns, setColumns] = useState<TableColumns>([
@@ -38,7 +38,7 @@ function App() {
 		}
 	])
 
-	let [generatorOptions, setGeneratorOptions] = useState<TableMethodGeneratorOptions>({});
+	// let [generatorOptions, setGeneratorOptions] = useState<TableMethodGeneratorOptions>({});
 
 	const onChange = (e: TableColumns) => {
 		columns = e
@@ -50,7 +50,7 @@ function App() {
 			<main>
 				<TableDefinitionForm value={columns} onChange={onChange} />
 				<hr />
-				<TableMethodCodeBlock columns={columns} options={generatorOptions}/>
+				<TableMethodCodeBlock columns={columns}/>
 			</main>
     </div>
   );

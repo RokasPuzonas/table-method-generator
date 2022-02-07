@@ -31,17 +31,17 @@ function get_total_width(columns: TableColumns): number {
 	return total_width;
 }
 
-export function generate(columns: TableColumns, options: TableMethodGeneratorOptions): string {
-	const method_name = options.method_name || "PrintTable"
+export function generate(columns: TableColumns, options?: TableMethodGeneratorOptions): string {
+	const method_name = options?.method_name || "PrintTable"
 	if (columns.length === 0) {
 		return `static void ${method_name}()\n{\n}`;
 	}
 
-	const empty_message = options.empty_message || "Empty"
-	const container_name = options.container_name || "container"
-	const container_type = options.container_type || "Container"
-	const entry_name = options.entry_name || "e"
-	const entry_type = options.entry_type || "Entry"
+	const empty_message = options?.empty_message || "Empty"
+	const container_name = options?.container_name || "container"
+	const container_type = options?.container_type || "Container"
+	const entry_name = options?.entry_name || "e"
+	const entry_type = options?.entry_type || "Entry"
 
 	// Total width
 	const total_width = get_total_width(columns)

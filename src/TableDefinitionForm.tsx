@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from "react"
-import { Alignment, TableColumn, TableColumns } from "./TableMethodGenerator"
-
+import { Alignment, generate, TableColumn, TableColumns } from "./TableMethodGenerator"
 
 interface TableColumnProps {
 	value: TableColumn
@@ -80,15 +79,21 @@ function TableDefinitionForm(props: TableDefinitionProps) {
 		}
 	}
 
+	const onClickCopy = () => {
+		navigator.clipboard.writeText(generate(columns))
+	}
+
   return (
 		<form onSubmit={(e) => e.preventDefault()}>
-			<label>Column:</label>
+			<label>Column name:</label>
 			<input
 				type="text"
 				value={currentName}
 				onChange={(e) => setCurrentName(e.target.value)}
 				onKeyPress={(e) => e.key === "Enter" && addRow()}
 			/>
+			<button onClick={onClickCopy}>Insert column</button>
+			<button onClick={onClickCopy}>Copy code 📋!</button>
 			<ol>
 				{columns.map((item, i) =>
 					<TableDefinitionRow key={i} value={item} onChange={(e) => updateRow(i, e)}/>

@@ -7,22 +7,17 @@ SyntaxHighlighter.registerLanguage('csharp', csharp);
 
 interface Props {
 	columns: TableColumns
-	options: TableMethodGeneratorOptions
+	options?: TableMethodGeneratorOptions
 }
 
 function TableMethodCodeBlock(props: Props) {
 	let script = generate(props.columns, props.options)
-
-	const onClickCopy = () => {
-		navigator.clipboard.writeText(script)
-	}
 
 	return (
 		<div>
 			<SyntaxHighlighter language="csharp" style={vs2015}>
 				{script}
 			</SyntaxHighlighter>
-			<button onClick={onClickCopy}>Copy code!</button>
 		</div>
 	)
 }
