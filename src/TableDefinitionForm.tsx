@@ -4,7 +4,7 @@ import { Alignment, TableColumn, TableColumns } from "./TableMethodGenerator"
 
 interface TableColumnProps {
 	value: TableColumn
-	onChange?: { (e: TableColumn): void }
+	onChange: { (e: TableColumn): void }
 }
 
 function TableDefinitionRow(props: TableColumnProps) {
@@ -12,36 +12,28 @@ function TableDefinitionRow(props: TableColumnProps) {
 	const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
 		props.value.name = e.target.value
 		setName(props.value.name)
-		if (props.onChange) {
-			props.onChange(props.value)
-		}
+		props.onChange(props.value)
 	}
 
 	let [, setField] = useState(props.value.field)
 	const onChangeField = (e: ChangeEvent<HTMLInputElement>) => {
 		props.value.field = e.target.value
 		setField(props.value.field)
-		if (props.onChange) {
-			props.onChange(props.value)
-		}
+		props.onChange(props.value)
 	}
 
 	let [, setWidth] = useState(props.value.width)
 	const onChangeWidth = (e: ChangeEvent<HTMLInputElement>) => {
 		props.value.width = parseFloat(e.target.value)
 		setWidth(props.value.width)
-		if (props.onChange) {
-			props.onChange(props.value)
-		}
+		props.onChange(props.value)
 	}
 
 	let [, setAlignment] = useState(props.value.alignment)
 	const onChangeAlignment = (e: ChangeEvent<HTMLSelectElement>) => {
 		props.value.alignment = e.target.value as Alignment
 		setAlignment(props.value.alignment)
-		if (props.onChange) {
-			props.onChange(props.value)
-		}
+		props.onChange(props.value)
 	}
 
 	return (
@@ -78,12 +70,10 @@ function TableDefinitionForm(props: TableDefinitionProps) {
 	const updateRow = (i: number, column: TableColumn) => {
 		if (column.name === "") {
 			columns.splice(i, 1)
-			columns = [...columns]
-			setColumns(columns)
+			setColumns([...columns])
 		} else {
-			columns = [...columns]
 			columns[i] = column
-			setColumns(columns)
+			setColumns([...columns])
 		}
 		if (props.onChange !== undefined) {
 			props.onChange(columns)
@@ -100,11 +90,9 @@ function TableDefinitionForm(props: TableDefinitionProps) {
 				onKeyPress={(e) => e.key === "Enter" && addRow()}
 			/>
 			<ol>
-				{
-					columns.map((item, i) =>
-						<TableDefinitionRow key={i} value={item} onChange={(e) => updateRow(i, e)}/>
-					)
-				}
+				{columns.map((item, i) =>
+					<TableDefinitionRow key={i} value={item} onChange={(e) => updateRow(i, e)}/>
+				)}
 			</ol>
 		</form>
 	)
