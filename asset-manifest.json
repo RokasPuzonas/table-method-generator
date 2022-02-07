@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/table-method-generator/static/css/main.c2aaf15f.css",
-    "main.js": "/table-method-generator/static/js/main.0e5816ce.js",
+    "main.js": "/table-method-generator/static/js/main.d0c66cc2.js",
     "static/js/787.7d8fd132.chunk.js": "/table-method-generator/static/js/787.7d8fd132.chunk.js",
     "index.html": "/table-method-generator/index.html",
     "main.c2aaf15f.css.map": "/table-method-generator/static/css/main.c2aaf15f.css.map",
-    "main.0e5816ce.js.map": "/table-method-generator/static/js/main.0e5816ce.js.map",
+    "main.d0c66cc2.js.map": "/table-method-generator/static/js/main.d0c66cc2.js.map",
     "787.7d8fd132.chunk.js.map": "/table-method-generator/static/js/787.7d8fd132.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c2aaf15f.css",
-    "static/js/main.0e5816ce.js"
+    "static/js/main.d0c66cc2.js"
   ]
 }
