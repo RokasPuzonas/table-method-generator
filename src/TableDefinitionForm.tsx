@@ -59,10 +59,12 @@ function TableDefinitionForm(props: TableDefinitionProps) {
 	let [columns, setColumns] = useState<TableColumns>(props.value)
 
 	const addRow = () => {
-		columns.push({ name: currentName })
-		setCurrentName("")
-		if (props.onChange !== undefined) {
-			props.onChange(columns)
+		if (currentName.length > 0) {
+			columns.push({ name: currentName })
+			setCurrentName("")
+			if (props.onChange !== undefined) {
+				props.onChange(columns)
+			}
 		}
 	}
 
@@ -92,7 +94,7 @@ function TableDefinitionForm(props: TableDefinitionProps) {
 				onChange={(e) => setCurrentName(e.target.value)}
 				onKeyPress={(e) => e.key === "Enter" && addRow()}
 			/>
-			<button onClick={onClickCopy}>Insert column</button>
+			<button onClick={addRow}>Insert column</button>
 			<button onClick={onClickCopy}>Copy code 📋!</button>
 			<ol>
 				{columns.map((item, i) =>

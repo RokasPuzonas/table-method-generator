@@ -11,12 +11,10 @@ interface Props {
 }
 
 function TableMethodCodeBlock(props: Props) {
-	let script = generate(props.columns, props.options)
-
 	return (
 		<div>
 			<SyntaxHighlighter language="csharp" style={vs2015}>
-				{script}
+				{generate(props.columns, props.options)}
 			</SyntaxHighlighter>
 		</div>
 	)
