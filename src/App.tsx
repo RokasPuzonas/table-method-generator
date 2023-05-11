@@ -4,6 +4,10 @@ import TableDefinitionForm from './TableDefinitionForm';
 import TableMethodCodeBlock from './TableMethodCodeBlock';
 import { TableColumns } from './TableMethodGenerator';
 
+// TODO: Add section for testing how rendered table looks
+
+// TODO: Render resizeable table which automatically update the necessary fields
+
 function App() {
 	let initialColumns: TableColumns = []
 
